@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>TreeVue |  </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700" rel="stylesheet">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/style/doc.css">
+
+    <!-- favicon -->
+    <link rel="icon" href="/images/favicon.ico">
+
+    
+
+  </head>
+  <body>
+
+   <script>window.__INITIAL_STATE__ = {"page":{"path":"api/events.html","title":""},"data":{"navigation":{"logo":{"text":"TreeVue","type":"link","path":"index.html"},"main":[{"text":"Introduction","type":"label","path":"index.html"},{"text":"Getting Started","type":"label","children":[{"text":"Installation","type":"link","path":"getting-started/installation.html"},{"text":"Basic usage","type":"link","path":"getting-started/basic-usage.html"},{"text":"Demo application","type":"link","path":"getting-started/demoapp.html"}]},{"text":"Guides","type":"label","children":[]},{"text":"API","type":"label","children":[{"text":"Component Options","type":"link","path":"api/options.html"},{"text":"Events","type":"link","path":"api/events.html"}]},{"text":"SUPPORT AND FEEDBACK","type":"label"},{"text":"Raise an Issue on Github","type":"link","path":"https://github.com/t0lik/tree-vue/issues/new"}]}},"config":{"timezone":"Europe/Moscow","root":"/","time_format":"HH:mm:ss","theme":"../node_modules/hexo-theme-doc","theme_config":{"swagger_ui":{"version":2,"permalinks":true,"api_explorer":true,"download":"Download specification","show_extensions":false,"deep_linking":true,"display_operation_id":false,"doc_expansion":"none"},"search":{"skip":false,"background":false,"route":"/lunr.json"},"favicon":"images/favicon.ico"}}}</script>
+
+    <div id="react-navigation-root"><div class="doc-navigation" data-reactroot=""><nav class="doc-navbar"><a href="/index.html" class="doc-navbar__logo"><img src="/images/logo.png" class="doc-navbar__logo__img"/><span class="doc-navbar__logo__text">TreeVue</span></a><i class="dc-icon dc-icon--close dc-icon--interactive doc-sidebar-close doc-navbar__sidebar-close doc-navbar__sidebar-close--desktop"></i><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-navbar__sidebar-toggle"></i></nav><nav class="doc-sidebar"><div class="doc-sidebar__vertical-menu"><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-sidebar-toggle--primary doc-sidebar__vertical-menu__item"></i><i class="dc-icon dc-icon--search dc-icon--interactive doc-sidebar__vertical-menu__item doc-sidebar__vertical-menu__item--primary"></i></div><div class="doc-sidebar-content"><div class="doc-sidebar__search-form"></div><ul class="doc-sidebar-list"></ul></div></nav></div></div>
+    <div class="doc-content">
+  <div class="dc-page">
+    <div class="dc-card">
+      <div id="react-search-results-root"></div>
+      <div id="page-content" class="doc-formatting">
+        <h1 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h1><p>All component events can be captured using the usual Vue event syntax:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tree-vue</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:items</span>=<span class="string">"items"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:options</span>=<span class="string">"options"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">ref</span>=<span class="string">"treeVue"</span></span></span><br><span class="line"><span class="tag">      @<span class="attr">tree:checked:all</span>=<span class="string">"onCheckedAll"</span></span></span><br><span class="line"><span class="tag">      @<span class="attr">node:enabled</span>=<span class="string">"onNodeEnabled"</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>The component events are divided into two groups: tree events and node events.</p>
+<h2 id="Tree-events"><a href="#Tree-events" class="headerlink" title="Tree events"></a>Tree events</h2><table>
+<thead>
+<tr>
+<th>Name</th>
+<th align="center">Parameters</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>tree:checked:all</strong></td>
+<td align="center">none</td>
+<td align="left">Emits on <code>checkAll</code> function call</td>
+</tr>
+<tr>
+<td><strong>tree:checked:visible</strong></td>
+<td align="center">none</td>
+<td align="left">Emits on <code>checkVisible</code> function call</td>
+</tr>
+<tr>
+<td><strong>tree:collapsed:all</strong></td>
+<td align="center">none</td>
+<td align="left">Emits on <code>collapseAll</code> function call</td>
+</tr>
+<tr>
+<td><strong>tree:disabled:all</strong></td>
+<td align="center">none</td>
+<td align="left">Emits on <code>disableAll</code> function call</td>
+</tr>
+<tr>
+<td><strong>tree:enabled:all</strong></td>
+<td align="center">none</td>
+<td align="left">Emits on <code>enableAll</code> function call</td>
+</tr>
+<tr>
+<td><strong>tree:filtered</strong></td>
+<td align="center">matched nodes, search object</td>
+<td align="left">Emits on <code>filter</code> function call. First parameter is the array of all nodes that are matched the search object passed to <code>filter</code> function. Second one is the search object passed to <code>filter</code> function.</td>
+</tr>
+<tr>
+<td><strong>tree:filter:cleared</strong></td>
+<td align="center">none</td>
+<td align="left">Emits on <code>clearFilter</code> function call.</td>
+</tr>
+<tr>
+<td><strong>tree:unchecked:all</strong></td>
+<td align="center">none</td>
+<td align="left">Emits on <code>uncheckAll</code> function call</td>
+</tr>
+<tr>
+<td><strong>tree:unchecked:visible</strong></td>
+<td align="center">none</td>
+<td align="left">Emits on <code>uncheckVisible</code> function call</td>
+</tr>
+</tbody></table>
+<h2 id="Node-events"><a href="#Node-events" class="headerlink" title="Node events"></a>Node events</h2><table>
+<thead>
+<tr>
+<th>Name</th>
+<th align="center">Parameters</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>node:child:added</strong></td>
+<td align="center">source item, child node</td>
+<td align="left">Emits on  adding child node to another node (<code>addChild</code> or <code>insertChild</code> functions). First parameter is the source item that is being added as a child. Second one is the child node representing this source item.</td>
+</tr>
+<tr>
+<td><strong>node:child:removed</strong></td>
+<td align="center">node</td>
+<td align="left">Emits on removing child node (<code>remove</code> function call on a child node). The parameter is the removed child node.</td>
+</tr>
+<tr>
+<td><strong>node:clicked</strong></td>
+<td align="center">node</td>
+<td align="left">Emits on clicking a node text. The parameter is the clicked node.</td>
+</tr>
+<tr>
+<td><strong>node:collapsed</strong></td>
+<td align="center">node</td>
+<td align="left">Emits on collapsing node (for instance after <code>collapse</code> function call). The parameter is the collapsed node.</td>
+</tr>
+<tr>
+<td><strong>node:disabled</strong></td>
+<td align="center">node</td>
+<td align="left">Emits on disabling node (for instance after <code>disable</code> function call). The parameter is the disabled node.</td>
+</tr>
+<tr>
+<td><strong>node:enabled</strong></td>
+<td align="center">node</td>
+<td align="left">Emits on enabling node (for instance after <code>enable</code> function call). The parameter is the enabled node.</td>
+</tr>
+<tr>
+<td><strong>node:expanded</strong></td>
+<td align="center">node</td>
+<td align="left">Emits on expanding node (for instance after <code>expand</code> function call). The parameter is the expanded node.</td>
+</tr>
+<tr>
+<td><strong>node:focused</strong></td>
+<td align="center">node</td>
+<td align="left">Emits after a node received focus on its text component. The parameter is the focused node.</td>
+</tr>
+<tr>
+<td><strong>node:removed</strong></td>
+<td align="center">node</td>
+<td align="left">Emits on removing root node (<code>remove</code> function call on a root node). The parameter is the removed root node.</td>
+</tr>
+<tr>
+<td><strong>node:selected</strong></td>
+<td align="center">node &#124; null</td>
+<td align="left">Emits on slecting node (<code>select</code> function call or when a node receives focus). The parameter is the selected node.</td>
+</tr>
+</tbody></table>
+
+        <div id="react-support-footer-root"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+    
+
+    <!-- js vendors -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/2.1.0/lunr.min.js"></script>
+
+    <!-- js source  -->
+    <script src="/script/doc.js"></script>
+
+    
+
+  </body>
+</html>

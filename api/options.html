@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>TreeVue |  </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700" rel="stylesheet">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/style/doc.css">
+
+    <!-- favicon -->
+    <link rel="icon" href="/images/favicon.ico">
+
+    
+
+  </head>
+  <body>
+
+   <script>window.__INITIAL_STATE__ = {"page":{"path":"api/options.html","title":""},"data":{"navigation":{"logo":{"text":"TreeVue","type":"link","path":"index.html"},"main":[{"text":"Introduction","type":"label","path":"index.html"},{"text":"Getting Started","type":"label","children":[{"text":"Installation","type":"link","path":"getting-started/installation.html"},{"text":"Basic usage","type":"link","path":"getting-started/basic-usage.html"},{"text":"Demo application","type":"link","path":"getting-started/demoapp.html"}]},{"text":"Guides","type":"label","children":[]},{"text":"API","type":"label","children":[{"text":"Component Options","type":"link","path":"api/options.html"},{"text":"Events","type":"link","path":"api/events.html"}]},{"text":"SUPPORT AND FEEDBACK","type":"label"},{"text":"Raise an Issue on Github","type":"link","path":"https://github.com/t0lik/tree-vue/issues/new"}]}},"config":{"timezone":"Europe/Moscow","root":"/","time_format":"HH:mm:ss","theme":"../node_modules/hexo-theme-doc","theme_config":{"swagger_ui":{"version":2,"permalinks":true,"api_explorer":true,"download":"Download specification","show_extensions":false,"deep_linking":true,"display_operation_id":false,"doc_expansion":"none"},"search":{"skip":false,"background":false,"route":"/lunr.json"},"favicon":"images/favicon.ico"}}}</script>
+
+    <div id="react-navigation-root"><div class="doc-navigation" data-reactroot=""><nav class="doc-navbar"><a href="/index.html" class="doc-navbar__logo"><img src="/images/logo.png" class="doc-navbar__logo__img"/><span class="doc-navbar__logo__text">TreeVue</span></a><i class="dc-icon dc-icon--close dc-icon--interactive doc-sidebar-close doc-navbar__sidebar-close doc-navbar__sidebar-close--desktop"></i><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-navbar__sidebar-toggle"></i></nav><nav class="doc-sidebar"><div class="doc-sidebar__vertical-menu"><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-sidebar-toggle--primary doc-sidebar__vertical-menu__item"></i><i class="dc-icon dc-icon--search dc-icon--interactive doc-sidebar__vertical-menu__item doc-sidebar__vertical-menu__item--primary"></i></div><div class="doc-sidebar-content"><div class="doc-sidebar__search-form"></div><ul class="doc-sidebar-list"></ul></div></nav></div></div>
+    <div class="doc-content">
+  <div class="dc-page">
+    <div class="dc-card">
+      <div id="react-search-results-root"></div>
+      <div id="page-content" class="doc-formatting">
+        <h1 id="Component-Options"><a href="#Component-Options" class="headerlink" title="Component Options"></a>Component Options</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th align="center">Type</th>
+<th align="center">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>autoSort</strong></td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+<td>If <strong>true</strong> then turns on auto-sorting whenever node collection is changed</td>
+</tr>
+<tr>
+<td><strong>canDelete</strong></td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+<td>Allows to delete a selected node by using the <strong>Del</strong> key</td>
+</tr>
+<tr>
+<td><strong>canEdit</strong></td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+<td>Allows to edit a selected node caption <a href="#Edit-node-caption">See below</a></td>
+</tr>
+<tr>
+<td><strong>checkMode</strong></td>
+<td align="center">String</td>
+<td align="center">‘independent’</td>
+<td>Multiselection mode for checkboxes. Can be either <code>independent</code> or <code>linked</code>. <a href="#Check-mode">See below</a></td>
+</tr>
+<tr>
+<td><strong>checkOnSelect</strong></td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+<td>If <strong>true</strong> when a node is selected it is also checked</td>
+</tr>
+<tr>
+<td><strong>childrenProp</strong></td>
+<td align="center">String</td>
+<td align="center">‘children’</td>
+<td>Indicates a prop in <code>items</code> that contains an array of an underlying items.</td>
+</tr>
+<tr>
+<td><strong>hideEmptyIcon</strong></td>
+<td align="center">Boolean</td>
+<td align="center">true</td>
+<td>Allows to collapse the space occupied by an empty icon before a node caption</td>
+</tr>
+<tr>
+<td><strong>icons</strong></td>
+<td align="center">Object</td>
+<td align="center">icons.defaultIcons</td>
+<td>Contains classes for different node states. <a href="#Node-State-Icons">See below</a></td>
+</tr>
+<tr>
+<td><strong>idProp</strong></td>
+<td align="center">String</td>
+<td align="center">‘id’</td>
+<td>Indicates a prop that uniquely identifies every node. <a href="#Node-Identification">See below</a></td>
+</tr>
+<tr>
+<td><strong>nameProp</strong></td>
+<td align="center">String &#124; Function</td>
+<td align="center">‘name’</td>
+<td>Indicates a prop or a function that will be used to show the node caption. <a href="#Node-Caption">See below</a></td>
+</tr>
+<tr>
+<td><strong>notFoundText</strong></td>
+<td align="center">String</td>
+<td align="center">‘no nodes are found’</td>
+<td>Indicates a text that will be shown when after node filtering no nodes ae shown. See <a href="#Filtering">filtering</a></td>
+</tr>
+<tr>
+<td><strong>openOnSelect</strong></td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+<td>If <strong>true</strong> when a node is selected it is also will be open</td>
+</tr>
+<tr>
+<td><strong>showCheckbox</strong></td>
+<td align="center">Boolean</td>
+<td align="center">true</td>
+<td>Allows to turn on multiselection mode by showing checkboxes for every node</td>
+</tr>
+<tr>
+<td><strong>showIcon</strong></td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+<td>Allows to show icons for every node. <a href="#Node-State-Icons">See below</a></td>
+</tr>
+<tr>
+<td><strong>sortComparator</strong></td>
+<td align="center">Function</td>
+<td align="center">String.prototype.localeCompare</td>
+<td>Function that is used to sort nodes by their captions. See <a href="#Sort">sort</a></td>
+</tr>
+<tr>
+<td><strong>styleClasses</strong></td>
+<td align="center">Object</td>
+<td align="center"></td>
+<td>Contains classes for different visual node parts. <a href="#Node-Style-Classes">See below</a></td>
+</tr>
+<tr>
+<td><strong>styleClasses.checkbox</strong></td>
+<td align="center">String &#124; Object</td>
+<td align="center">null</td>
+<td>Contains class(es) that is added to node checkbox classes. <a href="#Node-Style-Classes">See below</a></td>
+</tr>
+<tr>
+<td><strong>styleClasses.expander</strong></td>
+<td align="center">String &#124; Object</td>
+<td align="center">null</td>
+<td>Contains class(es) that is added to node expander classes. <a href="#Node-Style-Classes">See below</a></td>
+</tr>
+<tr>
+<td><strong>styleClasses.icon</strong></td>
+<td align="center">String &#124; Object</td>
+<td align="center">null</td>
+<td>Contains class(es) that is added to node icon classes. <a href="#Node-Style-Classes">See below</a></td>
+</tr>
+<tr>
+<td><strong>styleClasses.text</strong></td>
+<td align="center">String &#124; Object</td>
+<td align="center">null</td>
+<td>Contains class(es) that is added to node text classes. <a href="#Node-Style-Classes">See below</a></td>
+</tr>
+</tbody></table>
+<h2 id="Edit-node-caption"><a href="#Edit-node-caption" class="headerlink" title="Edit node caption"></a>Edit node caption</h2><p>The edit mode are turned on by setting <code>options.canEdit=true</code>. To start editing a selected node press the <strong>F2</strong> key or perform <strong>double-click</strong> on the node caption.</p>
+<p>To save changes and exit the mode press <strong>Enter</strong>.<br>To cancel editing without saving changes press <strong>Esc</strong>.</p>
+<h2 id="Check-mode"><a href="#Check-mode" class="headerlink" title="Check mode"></a>Check mode</h2><h3 id="independent-mode"><a href="#independent-mode" class="headerlink" title="independent mode"></a><code>independent</code> mode</h3><p>In this mode all the nodes have two check states: <code>checked</code> and <code>unchecked</code>.<br>Checking/unchecking a node does not affect the check state of its parent or child nodes.</p>
+<p><img src="../images/independent-check-mode.png" alt="independent check mode"></p>
+<h3 id="linked-mode"><a href="#linked-mode" class="headerlink" title="linked mode"></a><code>linked</code> mode</h3><p>In this mode all the nodes have three check states: <code>checked</code>, <code>unchecked</code> and <code>indeterminate</code>.<br>Checking/unchecking a node affects the check state of its parent and/or child nodes. If some but not all child nodes are checked then their parent node is in <code>indeterminate</code> check state and this state looks different than the checked and unchecked states.</p>
+<p>The mode has the following behaviour:</p>
+<ul>
+<li>checking a parent node also checks all its child nodes</li>
+<li>unchecking a parent node also unchecks all its child nodes</li>
+<li>checking a child node also changes its parent check state: <code>checked</code> or <code>indeterminate</code> (see above)</li>
+<li>unchecking a child node also changes its parent check state: <code>unchecked</code> or <code>indeterminate</code> (see above)</li>
+</ul>
+<p><img src="../images/linked-check-mode.png" alt="linked check mode"></p>
+<h2 id="Node-state-icons"><a href="#Node-state-icons" class="headerlink" title="Node state icons"></a>Node state icons</h2><p><code>options.icons</code> has the following state icons than contains icon classes:</p>
+<ul>
+<li><code>closedIcon</code>: icon classes for the indication of the closed node state: <code>treevue-default-arrow</code> <img src="../images/closed-state-icon.png" alt="closed state icon"></li>
+<li><code>openIcon</code>: icon classes for the indication of the open node state <code>treevue-default-arrow expanded</code> <img src="../images/open-state-icon.png" alt="open state icon"></li>
+<li><code>uncheckedIcon</code>: icon classes for the indication of the unchecked node state <code>treevue-default-checkbox</code> <img src="../images/unchecked-state-icon.png" alt="open state icon"></li>
+<li><code>checkedIcon</code>: icon classes for the indication of the checked node state <code>treevue-default-checkbox checked</code> <img src="../images/checked-state-icon.png" alt="open state icon"></li>
+<li><code>partiallyCheckedIcon</code>: icon classes for the indication of the indeterminate node state <code>treevue-default-checkbox indeterminate</code> <img src="../images/indeterminate-state-icon.png" alt="open state icon"></li>
+</ul>
+<p>The above icon classes are default icons classed for the component.<br>If you use <a href="https://fontawesome.com/" target="_blank" rel="noopener">Fontawesome icons</a> in your application you can switch node state icons to fontawesome icons:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tree-vue</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:items</span>=<span class="string">"items"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:options</span>=<span class="string">"options"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">ref</span>=<span class="string">"treeVue"</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; icons &#125; <span class="keyword">from</span> <span class="string">'vu-tree'</span></span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="actionscript">    <span class="keyword">this</span>.$refs.treeVue.treeOptions.icons = icons.fontawesome</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Node-identification"><a href="#Node-identification" class="headerlink" title="Node identification"></a>Node identification</h2><p>To allow the access to every node all of them must be identified by some unique prop value. If source items do not have such unique prop for every node then the component can assign unique identifiers to all the nodes itself. By default <code>options.idProp=&#39;id&#39;</code>. You can customize what exact prop to use as a prop with unique values by setting <code>options.idProp</code> equal to desired prop. If you wish the component to assign identifiers automatically than just set <code>options.idProp</code> to <strong>null</strong>.</p>
+<h2 id="Node-caption"><a href="#Node-caption" class="headerlink" title="Node caption"></a>Node caption</h2><p>The visible node text in the component is a node caption. This caption is determined by <code>options.nameProp</code> that can be either string (name of the prop in the source item) or a function that has one parameter <code>item</code> (source item) and must return the node caption. By default <code>options.nameProp=&#39;name&#39;</code>. You can customize what exact prop to use as the caption prop by setting <code>options.nameProp</code> equal to a desired prop or a function.</p>
+<p>The example of using a function for returning the node caption:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$refs.treeVue.treeOptions.nameProp = <span class="function"><span class="params">item</span> =&gt;</span> item.title</span><br></pre></td></tr></table></figure>
+
+<h2 id="Node-style-classes"><a href="#Node-style-classes" class="headerlink" title="Node style classes"></a>Node style classes</h2><p>Every node has four main parts: checkbox, expander, icon, text. Every part can have its own set of style classes. You can either set those classes for all the nodes by setting the corresponding props in <code>options.styleClasses</code>.<br><code>options.styleClasses</code> has the following props than can contain style classes:</p>
+<ul>
+<li><code>checkbox</code>: classes that are added to classes of the node checkbox component, default value is <strong>null</strong></li>
+<li><code>expander</code>: classes that are added to classes of the node expander component, default value is <strong>null</strong></li>
+<li><code>icon</code>: classes that are added to classes of the node icon component, default value is <strong>null</strong></li>
+<li><code>text</code>: classes that are added to classes of the node text component, default value is <strong>null</strong></li>
+</ul>
+<p>Every node can override this classes by setting its own classes for all the node parts and also can have default style that applies to all its parts:</p>
+<ul>
+<li><code>default</code>: classes that are added to classes of all the node subcomponents, default value is <strong>null</strong></li>
+<li><code>checkbox</code>: classes that are added to classes of the node checkbox component, default value is <strong>null</strong></li>
+<li><code>expander</code>: classes that are added to classes of the node expander component, default value is <strong>null</strong></li>
+<li><code>icon</code>: classes that are added to classes of the node icon component, default value is <strong>null</strong></li>
+<li><code>text</code>: classes that are added to classes of the node text component, default value is <strong>null</strong></li>
+</ul>
+<p>To override node classes you can call the corresponding node’s functions. See <a href="#Node-functions">node functions</a></p>
+<p>Any style classes must be set by string or an object in the Vue.js style:</p>
+<p><code>string classes</code>: ‘class1 class2 class3’</p>
+<p><code>object classes</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  class1: <span class="literal">true</span>,</span><br><span class="line">  class2: <span class="literal">true</span>,</span><br><span class="line">  class3 : <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <div id="react-support-footer-root"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+    
+
+    <!-- js vendors -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/2.1.0/lunr.min.js"></script>
+
+    <!-- js source  -->
+    <script src="/script/doc.js"></script>
+
+    
+
+  </body>
+</html>
