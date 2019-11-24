@@ -22,8 +22,7 @@ export default {
   data () {
 ...
 ```
-
-The bare minimum of the component props that need to be set is `items`:
+The componenets has two props only: `items` and `options` (see [options](/api/options.html)). The bare minimum of the component props that need to be set is `items`:
 
 ```html
   <template>
@@ -33,7 +32,7 @@ The bare minimum of the component props that need to be set is `items`:
   </template>
 ```
 
-By default every item has to have one prop only - `name`. And to get hierarchical structure another node prop is required - `children`.
+By default every item has to have one prop only - `name`. To get hierarchical structure another node prop is required - `children`.
 
 ```javascript
     import { TreeVue } from 'vu-tree'

@@ -20,9 +20,9 @@
            "path": "getting-started/installation.html"
          },
          {
-           "text": "Component Options",
+           "text": "Basic usage",
            "type": "link",
-           "path": "getting-started/options.html"
+           "path": "getting-started/basic-usage.html"
          },
          {
            "text": "Demo application",
@@ -35,10 +35,21 @@
       "text": "Guides",
       "type": "label",
       "children": [
+      ]
+    },
+    {
+      "text": "API",
+      "type": "label",
+      "children": [
          {
-           "text": "Basic usage",
+           "text": "Component Options",
            "type": "link",
-           "path": "guides/basic-usage.html"
+           "path": "api/options.html"
+         },
+         {
+           "text": "Events",
+           "type": "link",
+           "path": "api/events.html"
          }
       ]
     },
