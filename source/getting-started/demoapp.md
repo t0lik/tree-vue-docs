@@ -3,7 +3,7 @@ To play around with main features of the component you can run demo application.
 
 To run the demo:
 
-* Clone this repository
+* Clone [this repository](https://github.com/t0lik/tree-vue)
 * `npm install`
 * `npm run serve` 
 * Visit `http://localhost:8080/` (or similar url that is located under the "App running at" after command "npm run serve")
