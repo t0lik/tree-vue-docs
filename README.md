@@ -1,4 +1,4 @@
-# Documentation for [TreeVue] (https://github.com/t0lik/tree-vue)
+# Documentation for [TreeVue](https://github.com/t0lik/tree-vue)
 
 ## License
 
