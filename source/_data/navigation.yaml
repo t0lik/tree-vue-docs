@@ -47,6 +47,11 @@
            "path": "api/options.html"
          },
          {
+           "text": "Storage",
+           "type": "link",
+           "path": "api/storage.html"
+         },
+         {
            "text": "Events",
            "type": "link",
            "path": "api/events.html"

@@ -12,12 +12,13 @@
 | **icons** | Object| icons.defaultIcons | Contains classes for different node states. [See below](#Node-State-Icons) |
 | **idProp**      | String    | 'id'       | Indicates a prop that uniquely identifies every node. [See below](#Node-Identification) |
 | **nameProp**      | String &#124; Function | 'name' | Indicates a prop or a function that will be used to show the node caption. [See below](#Node-Caption) |
+| **editNameProp**      | String &#124; Function | nameProp | Indicates a prop or a function that will be used to change the node caption. [See below](#Edit-node-caption) |
 | **notFoundText**         | String | 'no nodes are found' | Indicates a text that will be shown when after node filtering no nodes ae shown. See [filtering](#Filtering) |
 | **openOnSelect**         | Boolean | false | If **true** when a node is selected it is also will be open |
 | **showCheckbox**         | Boolean | true | Allows to turn on multiselection mode by showing checkboxes for every node |
 | **showIcon**         | Boolean | false | Allows to show icons for every node. [See below](#Node-State-Icons) |
 | **sortComparator**   | Function | String.prototype.localeCompare | Function that is used to sort nodes by their captions. See [sort](#Sort) |
-| **styleClasses** | Object || Contains classes for different visual node parts. [See below](#Node-Style-Classes) |
+| **styleClasses** | Object || Contains default classes for different visual node parts of all nodes. [See below](#Default-Node-Style-Classes) |
 | **styleClasses.checkbox** | String &#124; Object | null | Contains class(es) that is added to node checkbox classes. [See below](#Node-Style-Classes) |
 | **styleClasses.expander** | String &#124; Object | null | Contains class(es) that is added to node expander classes. [See below](#Node-Style-Classes) |
 | **styleClasses.icon** | String &#124; Object | null | Contains class(es) that is added to node icon classes. [See below](#Node-Style-Classes) |
@@ -25,6 +26,7 @@
 
 ## Edit node caption
 The edit mode are turned on by setting `options.canEdit=true`. To start editing a selected node press the **F2** key or perform **double-click** on the node caption.
+By default the prop of a node that is indicated in `options.nameProp` will be edited. You can set a prop that is different from `options.nameProp` by setting `options.editNameProp`. In contract with `options.nameProp` the `options.editNameProp` cannot be a function and a simple prop only.
 
 To save changes and exit the mode press **Enter**.
 To cancel editing without saving changes press **Esc**.
@@ -87,8 +89,8 @@ The example of using a function for returning the node caption:
       this.$refs.treeVue.treeOptions.nameProp = item => item.title
 ```
 
-## Node style classes
-Every node has four main parts: checkbox, expander, icon, text. Every part can have its own set of style classes. You can either set those classes for all the nodes by setting the corresponding props in `options.styleClasses`.
+## Default node style classes
+Every node has four main parts: checkbox, expander, icon, text. Every part can have its own set of style classes. You can either set those default classes for all the nodes by setting the corresponding props in `options.styleClasses` or by setting the same props in a node (see [Node style classes](#Node-style-classes)).
 `options.styleClasses` has the following props than can contain style classes:
 - `checkbox`: classes that are added to classes of the node checkbox component, default value is **null**
 - `expander`: classes that are added to classes of the node expander component, default value is **null**
@@ -103,7 +105,7 @@ Every node can override this classes by setting its own classes for all the node
 - `icon`: classes that are added to classes of the node icon component, default value is **null**
 - `text`: classes that are added to classes of the node text component, default value is **null**
 
-To override node classes you can call the corresponding node's functions. See [node functions](#Node-functions)
+To override default node classes you can call the corresponding node's functions. See [node functions](#Node-functions)
 
 Any style classes must be set by string or an object in the Vue.js style:
 
