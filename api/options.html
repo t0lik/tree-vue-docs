@@ -24,7 +24,7 @@
   </head>
   <body>
 
-   <script>window.__INITIAL_STATE__ = {"page":{"path":"api/options.html","title":""},"data":{"navigation":{"logo":{"text":"TreeVue","type":"link","path":"index.html"},"main":[{"text":"Introduction","type":"label","path":"index.html"},{"text":"Getting Started","type":"label","children":[{"text":"Installation","type":"link","path":"getting-started/installation.html"},{"text":"Basic usage","type":"link","path":"getting-started/basic-usage.html"},{"text":"Demo application","type":"link","path":"getting-started/demoapp.html"}]},{"text":"Guides","type":"label","children":[]},{"text":"API","type":"label","children":[{"text":"Component Options","type":"link","path":"api/options.html"},{"text":"Events","type":"link","path":"api/events.html"}]},{"text":"SUPPORT AND FEEDBACK","type":"label"},{"text":"Raise an Issue on Github","type":"link","path":"https://github.com/t0lik/tree-vue/issues/new"}]}},"config":{"timezone":"Europe/Moscow","root":"/tree-vue-docs/","time_format":"HH:mm:ss","theme":"../node_modules/hexo-theme-doc","theme_config":{"swagger_ui":{"version":2,"permalinks":true,"api_explorer":true,"download":"Download specification","show_extensions":false,"deep_linking":true,"display_operation_id":false,"doc_expansion":"none"},"search":{"skip":false,"background":false,"route":"/lunr.json"},"favicon":"images/favicon.ico"}}}</script>
+   <script>window.__INITIAL_STATE__ = {"page":{"path":"api/options.html","title":""},"data":{"navigation":{"logo":{"text":"TreeVue","type":"link","path":"index.html"},"main":[{"text":"Introduction","type":"label","path":"index.html"},{"text":"Getting Started","type":"label","children":[{"text":"Installation","type":"link","path":"getting-started/installation.html"},{"text":"Basic usage","type":"link","path":"getting-started/basic-usage.html"},{"text":"Demo application","type":"link","path":"getting-started/demoapp.html"}]},{"text":"Guides","type":"label","children":[]},{"text":"API","type":"label","children":[{"text":"Component Options","type":"link","path":"api/options.html"},{"text":"Storage","type":"link","path":"api/storage.html"},{"text":"Events","type":"link","path":"api/events.html"}]},{"text":"SUPPORT AND FEEDBACK","type":"label"},{"text":"Raise an Issue on Github","type":"link","path":"https://github.com/t0lik/tree-vue/issues/new"}]}},"config":{"timezone":"Europe/Moscow","root":"/tree-vue-docs/","time_format":"HH:mm:ss","theme":"../node_modules/hexo-theme-doc","theme_config":{"swagger_ui":{"version":2,"permalinks":true,"api_explorer":true,"download":"Download specification","show_extensions":false,"deep_linking":true,"display_operation_id":false,"doc_expansion":"none"},"search":{"skip":false,"background":false,"route":"/lunr.json"},"favicon":"images/favicon.ico"}}}</script>
 
     <div id="react-navigation-root"><div class="doc-navigation" data-reactroot=""><nav class="doc-navbar"><a href="/tree-vue-docs/index.html" class="doc-navbar__logo"><img src="/tree-vue-docs/images/logo.png" class="doc-navbar__logo__img"/><span class="doc-navbar__logo__text">TreeVue</span></a><i class="dc-icon dc-icon--close dc-icon--interactive doc-sidebar-close doc-navbar__sidebar-close doc-navbar__sidebar-close--desktop"></i><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-navbar__sidebar-toggle"></i></nav><nav class="doc-sidebar"><div class="doc-sidebar__vertical-menu"><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-sidebar-toggle--primary doc-sidebar__vertical-menu__item"></i><i class="dc-icon dc-icon--search dc-icon--interactive doc-sidebar__vertical-menu__item doc-sidebar__vertical-menu__item--primary"></i></div><div class="doc-sidebar-content"><div class="doc-sidebar__search-form"></div><ul class="doc-sidebar-list"></ul></div></nav></div></div>
     <div class="doc-content">
@@ -102,6 +102,12 @@
 <td>Indicates a prop or a function that will be used to show the node caption. <a href="#Node-Caption">See below</a></td>
 </tr>
 <tr>
+<td><strong>editNameProp</strong></td>
+<td align="center">String &#124; Function</td>
+<td align="center">nameProp</td>
+<td>Indicates a prop or a function that will be used to change the node caption. <a href="#Edit-node-caption">See below</a></td>
+</tr>
+<tr>
 <td><strong>notFoundText</strong></td>
 <td align="center">String</td>
 <td align="center">‘no nodes are found’</td>
@@ -135,7 +141,7 @@
 <td><strong>styleClasses</strong></td>
 <td align="center">Object</td>
 <td align="center"></td>
-<td>Contains classes for different visual node parts. <a href="#Node-Style-Classes">See below</a></td>
+<td>Contains default classes for different visual node parts of all nodes. <a href="#Default-Node-Style-Classes">See below</a></td>
 </tr>
 <tr>
 <td><strong>styleClasses.checkbox</strong></td>
@@ -162,7 +168,7 @@
 <td>Contains class(es) that is added to node text classes. <a href="#Node-Style-Classes">See below</a></td>
 </tr>
 </tbody></table>
-<h2 id="Edit-node-caption"><a href="#Edit-node-caption" class="headerlink" title="Edit node caption"></a>Edit node caption</h2><p>The edit mode are turned on by setting <code>options.canEdit=true</code>. To start editing a selected node press the <strong>F2</strong> key or perform <strong>double-click</strong> on the node caption.</p>
+<h2 id="Edit-node-caption"><a href="#Edit-node-caption" class="headerlink" title="Edit node caption"></a>Edit node caption</h2><p>The edit mode are turned on by setting <code>options.canEdit=true</code>. To start editing a selected node press the <strong>F2</strong> key or perform <strong>double-click</strong> on the node caption.<br>By default the prop of a node that is indicated in <code>options.nameProp</code> will be edited. You can set a prop that is different from <code>options.nameProp</code> by setting <code>options.editNameProp</code>. In contract with <code>options.nameProp</code> the <code>options.editNameProp</code> cannot be a function and a simple prop only.</p>
 <p>To save changes and exit the mode press <strong>Enter</strong>.<br>To cancel editing without saving changes press <strong>Esc</strong>.</p>
 <h2 id="Check-mode"><a href="#Check-mode" class="headerlink" title="Check mode"></a>Check mode</h2><h3 id="independent-mode"><a href="#independent-mode" class="headerlink" title="independent mode"></a><code>independent</code> mode</h3><p>In this mode all the nodes have two check states: <code>checked</code> and <code>unchecked</code>.<br>Checking/unchecking a node does not affect the check state of its parent or child nodes.</p>
 <p><img src="../images/independent-check-mode.png" alt="independent check mode"></p>
@@ -191,7 +197,7 @@
 <p>The example of using a function for returning the node caption:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$refs.treeVue.treeOptions.nameProp = <span class="function"><span class="params">item</span> =&gt;</span> item.title</span><br></pre></td></tr></table></figure>
 
-<h2 id="Node-style-classes"><a href="#Node-style-classes" class="headerlink" title="Node style classes"></a>Node style classes</h2><p>Every node has four main parts: checkbox, expander, icon, text. Every part can have its own set of style classes. You can either set those classes for all the nodes by setting the corresponding props in <code>options.styleClasses</code>.<br><code>options.styleClasses</code> has the following props than can contain style classes:</p>
+<h2 id="Default-node-style-classes"><a href="#Default-node-style-classes" class="headerlink" title="Default node style classes"></a>Default node style classes</h2><p>Every node has four main parts: checkbox, expander, icon, text. Every part can have its own set of style classes. You can either set those default classes for all the nodes by setting the corresponding props in <code>options.styleClasses</code> or by setting the same props in a node (see <a href="#Node-style-classes">Node style classes</a>).<br><code>options.styleClasses</code> has the following props than can contain style classes:</p>
 <ul>
 <li><code>checkbox</code>: classes that are added to classes of the node checkbox component, default value is <strong>null</strong></li>
 <li><code>expander</code>: classes that are added to classes of the node expander component, default value is <strong>null</strong></li>
@@ -206,7 +212,7 @@
 <li><code>icon</code>: classes that are added to classes of the node icon component, default value is <strong>null</strong></li>
 <li><code>text</code>: classes that are added to classes of the node text component, default value is <strong>null</strong></li>
 </ul>
-<p>To override node classes you can call the corresponding node’s functions. See <a href="#Node-functions">node functions</a></p>
+<p>To override default node classes you can call the corresponding node’s functions. See <a href="#Node-functions">node functions</a></p>
 <p>Any style classes must be set by string or an object in the Vue.js style:</p>
 <p><code>string classes</code>: ‘class1 class2 class3’</p>
 <p><code>object classes</code>:</p>

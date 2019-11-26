@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>TreeVue |  </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700" rel="stylesheet">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/tree-vue-docs/style/doc.css">
+
+    <!-- favicon -->
+    <link rel="icon" href="/tree-vue-docs/images/favicon.ico">
+
+    
+
+  </head>
+  <body>
+
+   <script>window.__INITIAL_STATE__ = {"page":{"path":"api/storage.html","title":""},"data":{"navigation":{"logo":{"text":"TreeVue","type":"link","path":"index.html"},"main":[{"text":"Introduction","type":"label","path":"index.html"},{"text":"Getting Started","type":"label","children":[{"text":"Installation","type":"link","path":"getting-started/installation.html"},{"text":"Basic usage","type":"link","path":"getting-started/basic-usage.html"},{"text":"Demo application","type":"link","path":"getting-started/demoapp.html"}]},{"text":"Guides","type":"label","children":[]},{"text":"API","type":"label","children":[{"text":"Component Options","type":"link","path":"api/options.html"},{"text":"Storage","type":"link","path":"api/storage.html"},{"text":"Events","type":"link","path":"api/events.html"}]},{"text":"SUPPORT AND FEEDBACK","type":"label"},{"text":"Raise an Issue on Github","type":"link","path":"https://github.com/t0lik/tree-vue/issues/new"}]}},"config":{"timezone":"Europe/Moscow","root":"/tree-vue-docs/","time_format":"HH:mm:ss","theme":"../node_modules/hexo-theme-doc","theme_config":{"swagger_ui":{"version":2,"permalinks":true,"api_explorer":true,"download":"Download specification","show_extensions":false,"deep_linking":true,"display_operation_id":false,"doc_expansion":"none"},"search":{"skip":false,"background":false,"route":"/lunr.json"},"favicon":"images/favicon.ico"}}}</script>
+
+    <div id="react-navigation-root"><div class="doc-navigation" data-reactroot=""><nav class="doc-navbar"><a href="/tree-vue-docs/index.html" class="doc-navbar__logo"><img src="/tree-vue-docs/images/logo.png" class="doc-navbar__logo__img"/><span class="doc-navbar__logo__text">TreeVue</span></a><i class="dc-icon dc-icon--close dc-icon--interactive doc-sidebar-close doc-navbar__sidebar-close doc-navbar__sidebar-close--desktop"></i><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-navbar__sidebar-toggle"></i></nav><nav class="doc-sidebar"><div class="doc-sidebar__vertical-menu"><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-sidebar-toggle--primary doc-sidebar__vertical-menu__item"></i><i class="dc-icon dc-icon--search dc-icon--interactive doc-sidebar__vertical-menu__item doc-sidebar__vertical-menu__item--primary"></i></div><div class="doc-sidebar-content"><div class="doc-sidebar__search-form"></div><ul class="doc-sidebar-list"></ul></div></nav></div></div>
+    <div class="doc-content">
+  <div class="dc-page">
+    <div class="dc-card">
+      <div id="react-search-results-root"></div>
+      <div id="page-content" class="doc-formatting">
+        <h1 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h1><p>The storage is the main place that stores all nodes and manages them. In the storage source items are converted into nodes according to their hierarchical structure and order.<br>The storage and any node in it have a lot of functions to control node behaviour and structure (see [storage functions](#Storage functions) and [node functions](#Node functions)).</p>
+<h2 id="Storage-props"><a href="#Storage-props" class="headerlink" title="Storage props"></a>Storage props</h2><table>
+<thead>
+<tr>
+<th>Prop</th>
+<th align="center">Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>tree</strong></td>
+<td align="center">Component</td>
+<td>the TreeVue component</td>
+</tr>
+<tr>
+<td><strong>treeOptions</strong></td>
+<td align="center">Object</td>
+<td>the TreeVue component options. See <a href="../api/options.html">Component options</a></td>
+</tr>
+<tr>
+<td><strong>options</strong></td>
+<td align="center">Object</td>
+<td>internal storage options.</td>
+</tr>
+<tr>
+<td><strong>CheckModes</strong></td>
+<td align="center">Object</td>
+<td>internal check modes enum.</td>
+</tr>
+<tr>
+<td><strong>selectedNode</strong></td>
+<td align="center">Node</td>
+<td>Currently selected node</td>
+</tr>
+<tr>
+<td><strong>originalItems</strong></td>
+<td align="center">Array of Object</td>
+<td>Array of the source items.</td>
+</tr>
+<tr>
+<td><strong>nodes</strong></td>
+<td align="center">Array of Nodes</td>
+<td>Array of nodes.</td>
+</tr>
+<tr>
+<td><strong>internalLastNodeId</strong></td>
+<td align="center">Number</td>
+<td>Internal integer counter for generating unique node identifiers.</td>
+</tr>
+</tbody></table>
+<h2 id="Node-structure"><a href="#Node-structure" class="headerlink" title="Node structure"></a>Node structure</h2><p>Any node has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th align="center">Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>id</strong></td>
+<td align="center">Number &#124; String &#124; Object</td>
+<td>unique identifier from source item or generated by the storage</td>
+</tr>
+<tr>
+<td><strong>item</strong></td>
+<td align="center">Object</td>
+<td>link to source item</td>
+</tr>
+<tr>
+<td><strong>parent</strong></td>
+<td align="center">Node</td>
+<td>link to a parent node. For root nodes it equals to <strong>null</strong></td>
+</tr>
+<tr>
+<td><strong>prev</strong></td>
+<td align="center">Node</td>
+<td>link to a previous node on the same level of the node hierarchy. For first nodes on the level it equals to <strong>null</strong></td>
+</tr>
+<tr>
+<td><strong>next</strong></td>
+<td align="center">Node</td>
+<td>link to a next node on the same level of the node hierarchy. For last nodes on the level it equals to <strong>null</strong></td>
+</tr>
+<tr>
+<td><strong>states</strong></td>
+<td align="center">Object</td>
+<td>All main states of a node that can be changed programmatically. Some states can be set from the same source items’ props.</td>
+</tr>
+<tr>
+<td><strong>states.checked</strong></td>
+<td align="center">Boolean</td>
+<td>Indicates either a node is checked or not. Default value is <strong>false</strong>. Can be set from source item.</td>
+</tr>
+<tr>
+<td><strong>states.disabled</strong></td>
+<td align="center">Boolean</td>
+<td>Indicates either a node is disabled or not. Default value is <strong>false</strong>. Can be set from source item.</td>
+</tr>
+<tr>
+<td><strong>states.open</strong></td>
+<td align="center">Boolean</td>
+<td>Indicates either a node is expanded or collapsed. Default value is <strong>false</strong>. Can be set from source item.</td>
+</tr>
+<tr>
+<td><strong>states.visible</strong></td>
+<td align="center">Boolean</td>
+<td>Indicates either a node is visible or not. Default value is <strong>true</strong>. Cannot be set from source item. This state is usually changed after applying a filter or clearing a filter.</td>
+</tr>
+<tr>
+<td><strong>states.matched</strong></td>
+<td align="center">Boolean</td>
+<td>Indicates either a node is matched a filter. Default value is <strong>false</strong>. Cannot be set from source item. This state is intended for an internal use of filtering.</td>
+</tr>
+<tr>
+<td><strong>styleClasses</strong></td>
+<td align="center">Object</td>
+<td>Contains classes for different visual node parts. <a href="#Node-Style-Classes">See below</a></td>
+</tr>
+<tr>
+<td><strong>styleClasses.default</strong></td>
+<td align="center">String &#124; Object</td>
+<td>null</td>
+</tr>
+<tr>
+<td><strong>styleClasses.checkbox</strong></td>
+<td align="center">String &#124; Object</td>
+<td>null</td>
+</tr>
+<tr>
+<td><strong>styleClasses.expander</strong></td>
+<td align="center">String &#124; Object</td>
+<td>null</td>
+</tr>
+<tr>
+<td><strong>styleClasses.icon</strong></td>
+<td align="center">String &#124; Object</td>
+<td>null</td>
+</tr>
+<tr>
+<td><strong>styleClasses.text</strong></td>
+<td align="center">String &#124; Object</td>
+<td>null</td>
+</tr>
+<tr>
+<td><strong>icon</strong></td>
+<td align="center">String</td>
+<td>classes that are added to <i> tag that represents a node icon.</td>
+</tr>
+<tr>
+<td><strong>children</strong></td>
+<td align="center">Array of Nodes</td>
+<td>child nodes created from child source items.</td>
+</tr>
+</tbody></table>
+<h2 id="Node-style-classes"><a href="#Node-style-classes" class="headerlink" title="Node style classes"></a>Node style classes</h2><p>Every node can override classes from <code>options.styleClasses</code> by setting its own classes for all the node parts and also can have default style classes that applies to all its parts:</p>
+<ul>
+<li><code>default</code>: classes that are added to classes of all the node subcomponents, default value is <strong>null</strong> (<strong>Not implemented yet</strong>)</li>
+<li><code>checkbox</code>: classes that are added to classes of the node checkbox component, default value is <strong>null</strong></li>
+<li><code>expander</code>: classes that are added to classes of the node expander component, default value is <strong>null</strong></li>
+<li><code>icon</code>: classes that are added to classes of the node icon component, default value is <strong>null</strong></li>
+<li><code>text</code>: classes that are added to classes of the node text component, default value is <strong>null</strong></li>
+</ul>
+<p>Please note that <code>default</code> classes do not override other specific classes unlike classes from <code>options.styleClasses</code>.</p>
+<p>To set node classes you can call the corresponding node’s functions. See <a href="#Node-functions">node functions</a></p>
+<h2 id="Storage-functions"><a href="#Storage-functions" class="headerlink" title="Storage functions"></a>Storage functions</h2><p>The storage functions allows to change a state or a structure of any specified node or a group of nodes.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th align="center">Parameters</th>
+<th align="left">Return value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>addChild(parent, item)</strong></td>
+<td align="center">Node, item</td>
+<td align="left">Node</td>
+<td align="left">Converts a source <strong>item</strong> to a node and adds the node to a <strong>parent</strong> node. Returns the added child node</td>
+</tr>
+<tr>
+<td><strong>check(node, withChildren = false)</strong></td>
+<td align="center">Node, Boolean</td>
+<td align="left">none</td>
+<td align="left">Checks a node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes are checked recursively as well.</td>
+</tr>
+<tr>
+<td><strong>checkAll()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Checks all nodes.</td>
+</tr>
+<tr>
+<td><strong>checkChildren(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Checks all node’s child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>checkVisible()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Checks all visible nodes.</td>
+</tr>
+<tr>
+<td><strong>clearFilter()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Restores a visibility and an open state of all previously filtered nodes. See <a href="#Filtering">filtering</a></td>
+</tr>
+<tr>
+<td><strong>collapse(node, withChildren = false)</strong></td>
+<td align="center">Node, Boolean</td>
+<td align="left">none</td>
+<td align="left">Collapses a node hiding its child nodes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes are collapsed recursively as well.</td>
+</tr>
+<tr>
+<td><strong>collapseAll()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Collapses all nodes hiding their child nodes.</td>
+</tr>
+<tr>
+<td><strong>collapseChildren(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Collapses all node’s child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>disable(node, withChildren = false)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Disables a node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes are disabled recursively as well.</td>
+</tr>
+<tr>
+<td><strong>disableAll()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Disables all nodes.</td>
+</tr>
+<tr>
+<td><strong>disableChildren(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Disables all node’s child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>enable(node, withChildren = false)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Enables a node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes are enabled recursively as well.</td>
+</tr>
+<tr>
+<td><strong>enableAll()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Enables all nodes.</td>
+</tr>
+<tr>
+<td><strong>enableChildren(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Enables all node’s child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>expand(node, withChildren = false)</strong></td>
+<td align="center">Node, Boolean</td>
+<td align="left">none</td>
+<td align="left">Expands a node showing its child nodes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes are expanded recursively as well.</td>
+</tr>
+<tr>
+<td><strong>expandAll()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Expands all nodes showing their child nodes.</td>
+</tr>
+<tr>
+<td><strong>expandChildren(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Expands all node’s child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>filter(searchObject, options)</strong></td>
+<td align="center">String &#124; RegExp &#124; Function, Object</td>
+<td align="left">Array of Nodes</td>
+<td align="left">Filters all nodes by the passed search criteria. Only matched nodes remain visible. Returns all matched nodes as a flat array. If <code>options.showChildren</code> parameter is <strong>true</strong> then all child nodes of any matched node will also be visible as well. See <a href="#Filtering">filtering</a></td>
+</tr>
+<tr>
+<td><strong>findAll(selector)</strong></td>
+<td align="center">Function</td>
+<td align="left">Array of Nodes</td>
+<td align="left">Returns all nodes that are matched by a selector function or an <strong>empty array</strong> if no matched nodes are found. The selector function has one parameter <strong>item</strong>  equals to a source item of a node and must return true if a node is matched by the selector criteria.</td>
+</tr>
+<tr>
+<td><strong>findOne(selector)</strong></td>
+<td align="center">Function</td>
+<td align="left">Node</td>
+<td align="left">Returns a node that is matched by a selector function or <strong>null</strong> if no matched node is found. The selector function has one parameter <strong>item</strong> equals to a source item of a node and must return true if a node is matched by the selector criteria.</td>
+</tr>
+<tr>
+<td><strong>findParent(node, selector)</strong></td>
+<td align="center">Node, Function</td>
+<td align="left">Node</td>
+<td align="left">Returns a parent node that is matched by a selector function or <strong>null</strong> if no matched node is found. The selector function has one parameter <strong>item</strong> equals to a source item of a node and must return true if a parent node is matched by the selector criteria. The search is started from the nearest parent.</td>
+</tr>
+<tr>
+<td><strong>findParents(node, selector)</strong></td>
+<td align="center">Node, Function</td>
+<td align="left">Node</td>
+<td align="left">Returns all parent nodes that are matched by a selector function or an <strong>empty array</strong> if no matched parent nodes are found. The selector function has one parameter <strong>item</strong> equals to a source item of a node and must return true if a parent node is matched by the selector criteria. The search is started from the nearest parent.</td>
+</tr>
+<tr>
+<td><strong>getById(id)</strong></td>
+<td align="center">Number &#124; String &#124; Object</td>
+<td align="left">Node</td>
+<td align="left">Returns a node by its unique identifier or <strong>null</strong> if a node with the passed inentifier does not exist.</td>
+</tr>
+<tr>
+<td><strong>getChecked()</strong></td>
+<td align="center">none</td>
+<td align="left">Array of Nodes</td>
+<td align="left">Returns all checked nodes as a flat array.</td>
+</tr>
+<tr>
+<td><strong>getChildren(item)</strong></td>
+<td align="center">Node</td>
+<td align="left">array of source items</td>
+<td align="left">Returns children of the specified item (not a node!) according to <code>options.childrenProp</code></td>
+</tr>
+<tr>
+<td><strong>getEditName(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">String</td>
+<td align="left">Returns a node prop that will be changed while editing. The returning value is depending on <code>options.editNameProp</code>. See <a href="../api/options.html#Edit-node-caption">Component options</a></td>
+</tr>
+<tr>
+<td><strong>getName(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">String</td>
+<td align="left">Returns a node caption. The returning value is depending on <code>options.nameProp</code>. See <a href="../api/options.html">Component options</a></td>
+</tr>
+<tr>
+<td><strong>getVisibility(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">Boolean</td>
+<td align="left">Returns a node visibility according to its parent <strong>open</strong> state and/or applied <strong>filter</strong>.</td>
+</tr>
+<tr>
+<td><strong>getVisible()</strong></td>
+<td align="center">none</td>
+<td align="left">Array of Nodes</td>
+<td align="left">Returns all visible nodes as a flat array.</td>
+</tr>
+<tr>
+<td><strong>insertChild(parent, item, beforeNode)</strong></td>
+<td align="center">Node, item, Node</td>
+<td align="left">Node</td>
+<td align="left">Converts a source <strong>item</strong> to a node and inserts the node to a <strong>parent</strong> node as the first child node. If the <strong>beforeNode</strong> parameter is <strong>Node</strong> then the new node will be inserted before the specified node. Returns the inserted child node.</td>
+</tr>
+<tr>
+<td><strong>remove(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Converts a source <strong>item</strong> to a node and inserts the node to a <strong>parent</strong> node as the first child node. If the <strong>beforeNode</strong> parameter is <strong>Node</strong> then the new node will be inserted before the specified node.</td>
+</tr>
+<tr>
+<td><strong>setCheckboxStyle(node, classList, withChildren = false)</strong></td>
+<td align="center">Node, String &#124; Object, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>checkbox</strong> style classes for a specified node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes <strong>checkbox</strong> style classes will be set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>setCheckState(node, state, withChildren = false)</strong></td>
+<td align="center">Node, Boolean, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>checked</strong> state of a node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes <strong>checked</strong> state are set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>setExpanderStyle(node, classList, withChildren = false)</strong></td>
+<td align="center">Node, String &#124; Object, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>expander</strong> style classes for a specified node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes <strong>expander</strong> style classes will be set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>setIconStyle(node, classList, withChildren = false)</strong></td>
+<td align="center">Node, String &#124; Object, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>icon</strong> style classes for a specified node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes <strong>icon</strong> style classes will be set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>setName(node, newName)</strong></td>
+<td align="center">Node, String</td>
+<td align="left">none</td>
+<td align="left">Set a node caption according to <code>options.editNameProp</code>. See <a href="../api/options.html#Edit-node-caption">Component options</a></td>
+</tr>
+<tr>
+<td><strong>setNodes(items)</strong></td>
+<td align="center">Array of Object</td>
+<td align="left">none</td>
+<td align="left">Converts and sets items as the new source of nodes</td>
+</tr>
+<tr>
+<td><strong>setOpenState(node, state, withChildren = false)</strong></td>
+<td align="center">Node, Boolean, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>open</strong> state of a node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes <strong>open</strong> state are set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>setSelected(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Selects a node.</td>
+</tr>
+<tr>
+<td><strong>setTextStyle(node, classList, withChildren = false)</strong></td>
+<td align="center">Node, String &#124; Object, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>text</strong> style classes for a specified node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes <strong>text</strong> style classes will be set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>showNode(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Expands all node’s parent nodes to make it possiable to show the specified node.</td>
+</tr>
+<tr>
+<td><strong>sort(comparator)</strong></td>
+<td align="center">Function</td>
+<td align="left">none</td>
+<td align="left">Sorts all nodes recursively using a specified comparator function. See <a href="#Sort">sort</a></td>
+</tr>
+<tr>
+<td><strong>uncheck(node, withChildren = false)</strong></td>
+<td align="center">Node, Boolean</td>
+<td align="left">none</td>
+<td align="left">Unchecks a node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all node’s child nodes are unchecked recursively as well.</td>
+</tr>
+<tr>
+<td><strong>uncheckAll()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Unchecks all nodes.</td>
+</tr>
+<tr>
+<td><strong>uncheckChildren(node)</strong></td>
+<td align="center">Node</td>
+<td align="left">none</td>
+<td align="left">Unchecks all node’s child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>uncheckVisible()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Unchecks all visible nodes.</td>
+</tr>
+<tr>
+<td><strong>visitAll(nodes, nodeCallback, onlyVisible = false)</strong></td>
+<td align="center">Array of nodes, Function, Boolean</td>
+<td align="left">none</td>
+<td align="left">Calls a function passed as the parameter on every node in the passed node array recursively and passes to it the corresponding node. If the third parameter <strong>onlyVisible</strong> is set to <strong>true</strong> than the function will be called for the visible nodes only.</td>
+</tr>
+<tr>
+<td><strong>visitAllParents(node, nodeCallback)</strong></td>
+<td align="center">Node, Function</td>
+<td align="left">none</td>
+<td align="left">Calls a function passed as the parameter on every node’s parent node of the passed node and passes to it the corresponding parent node.</td>
+</tr>
+</tbody></table>
+<h2 id="Node-functions"><a href="#Node-functions" class="headerlink" title="Node functions"></a>Node functions</h2><p>Node functions allows to change a state or a structure of a node.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th align="center">Parameters</th>
+<th align="left">Return value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>addChild(child)</strong></td>
+<td align="center">item</td>
+<td align="left">Node</td>
+<td align="left">Converts a source <strong>item</strong> to a node and adds it as the last child node. Returns the added child node</td>
+</tr>
+<tr>
+<td><strong>check(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Checks the node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes are checked recursively as well.</td>
+</tr>
+<tr>
+<td><strong>checkChildren()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Checks all child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>collapse(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Collapses the node hiding its child nodes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes are collapsed recursively as well.</td>
+</tr>
+<tr>
+<td><strong>collapseChildren()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Collapses all child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>deselect()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Deselects the node.</td>
+</tr>
+<tr>
+<td><strong>disable(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Disables the node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes are disabled recursively as well.</td>
+</tr>
+<tr>
+<td><strong>disableChildren()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Disables all child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>enable(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Enables the node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes are enabled recursively as well.</td>
+</tr>
+<tr>
+<td><strong>enableChildren()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Enables all child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>expand(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Expands the node showing its child nodes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes are expanded recursively as well.</td>
+</tr>
+<tr>
+<td><strong>expandChildren()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Expands all the node’s child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>findParent(selector)</strong></td>
+<td align="center">Function</td>
+<td align="left">Node</td>
+<td align="left">Returns a parent node that is matched by a selector function or <strong>null</strong> if no matched node is found. The selector function has one parameter <strong>item</strong> equals to a source item of a node and must return true if a parent node is matched by the selector criteria. The search is started from the nearest parent.</td>
+</tr>
+<tr>
+<td><strong>findParents(selector)</strong></td>
+<td align="center">Function</td>
+<td align="left">Node</td>
+<td align="left">Returns all parent nodes that are matched by a selector function or an <strong>empty array</strong> if no matched parent nodes are found. The selector function has one parameter <strong>item</strong> equals to a source item of a node and must return true if a parent node is matched by the selector criteria. The search is started from the nearest parent.</td>
+</tr>
+<tr>
+<td><strong>getName()</strong></td>
+<td align="center">none</td>
+<td align="left">String</td>
+<td align="left">Returns the caption. The returning value is depending on <code>options.nameProp</code>. See <a href="../api/options.html">Component options</a></td>
+</tr>
+<tr>
+<td><strong>indeterminate()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Returns <strong>true</strong> if there are some checked and some unchecked child nodes simultaniously and <code>options.checkMode</code> = <strong>linked</strong>.</td>
+</tr>
+<tr>
+<td><strong>insertChild(item, beforeNode)</strong></td>
+<td align="center">item, Node</td>
+<td align="left">Node</td>
+<td align="left">Converts a source <strong>item</strong> to a node and inserts it as the first child node. If the <strong>beforeNode</strong> parameter is <strong>Node</strong> then the new node will be inserted before the specified node. Returns the inserted child node.</td>
+</tr>
+<tr>
+<td><strong>resetCheckboxStyle(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Resets <strong>checkbox</strong> style classes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes <strong>checkbox</strong> style classes will be reset recursively as well.</td>
+</tr>
+<tr>
+<td><strong>resetExpanderStyle(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Resets <strong>expander</strong> style classes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes <strong>expander</strong> style classes will be reset recursively as well.</td>
+</tr>
+<tr>
+<td><strong>resetIconStyle(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Resets <strong>icon</strong> style classes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes <strong>icon</strong> style classes will be reset recursively as well.</td>
+</tr>
+<tr>
+<td><strong>resetTextStyle(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Resets <strong>text</strong> style classes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes <strong>text</strong> style classes will be reset recursively as well.</td>
+</tr>
+<tr>
+<td><strong>select()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Selects the node.</td>
+</tr>
+<tr>
+<td><strong>setCheckboxStyle(classList, withChildren = false)</strong></td>
+<td align="center">String &#124; Object, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>checkbox</strong> style classes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes <strong>checkbox</strong> style classes will be set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>setExpanderStyle(classList, withChildren = false)</strong></td>
+<td align="center">String &#124; Object, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>expander</strong> style classes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes <strong>expander</strong> style classes will be set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>setIconStyle(classList, withChildren = false)</strong></td>
+<td align="center">String &#124; Object, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>icon</strong> style classes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes <strong>icon</strong> style classes will be set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>setTextStyle(classList, withChildren = false)</strong></td>
+<td align="center">String &#124; Object, Boolean</td>
+<td align="left">none</td>
+<td align="left">Sets <strong>text</strong> style classes. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes <strong>text</strong> style classes will be set recursively as well.</td>
+</tr>
+<tr>
+<td><strong>show()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Expands all parent nodes to make it possiable to show the node.</td>
+</tr>
+<tr>
+<td><strong>uncheck(withChildren)</strong></td>
+<td align="center">Boolean</td>
+<td align="left">none</td>
+<td align="left">Unchecks the node. If the <strong>withChildren</strong> parameter is <strong>true</strong> then all child nodes are unchecked recursively as well.</td>
+</tr>
+<tr>
+<td><strong>uncheckChildren()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Unchecks all child nodes recursively.</td>
+</tr>
+<tr>
+<td><strong>visible()</strong></td>
+<td align="center">none</td>
+<td align="left">none</td>
+<td align="left">Returns the node visibility according to its parent <strong>open</strong> state and/or applied <strong>filter</strong>.</td>
+</tr>
+</tbody></table>
+
+        <div id="react-support-footer-root"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+    
+
+    <!-- js vendors -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/2.1.0/lunr.min.js"></script>
+
+    <!-- js source  -->
+    <script src="/tree-vue-docs/script/doc.js"></script>
+
+    
+
+  </body>
+</html>
